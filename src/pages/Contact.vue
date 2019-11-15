@@ -1,0 +1,33 @@
+<template>
+  <div>
+    <form
+      action="https://formspree.io/mpzzywyr"
+      method="POST"
+    >
+      <input
+        type="text"
+        name="name"
+      >
+      <input
+        type="email"
+        name="_replyto"
+      >
+      <input
+        type="text"
+        name="subject"
+        value="New submission!"
+      >
+      <textarea
+        name="body"
+      />
+      <input
+        type="submit"
+        value="Send"
+      >
+    </form>
+  </div>
+</template>
+
+<script>
+
+</script>

@@ -1,0 +1,17 @@
+{
+  "users": [
+    {
+      "id": "0",
+      "email": "mlk@dreams.com",
+      "password": "ihaveadream",
+      "name": "Martin Luther King"
+    },
+    {
+      "id": "1",
+      "email": "tummy@stickz.com",
+      "password": "pen",
+      "name": "John Dire"
+    }
+  ]
+}
+

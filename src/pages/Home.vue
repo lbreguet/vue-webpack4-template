@@ -1,16 +1,28 @@
 <template>
-  <div class="full-width center-content">
-    <img src="static/img/logo.png">
-    <WelcomeMessage name="Beautiful World" />
+  <div>
+    <h1>Welcome <span v-if="user">{{ user }}</span> to the Fan Film Database</h1>
   </div>
 </template>
 
 <script>
-import WelcomeMessage from 'components/Home/WelcomeMessage'
-
 export default {
-  components: {
-    WelcomeMessage
+  data: function () {
+    return {
+      user: undefined
+    }
+  },
+  created: function () {
+    fetch('https://api.myjson.com/bins/10lhvy')
+      .then(response => response.json())
+      .then(json => {
+        this.users = json.users
+      })
+  },
+  mounted: function () {
+    let v = sessionStorage.user
+    if (v !== 'undefined') {
+      this.user = JSON.parse(v)
+    }
   }
 }
 </script>
