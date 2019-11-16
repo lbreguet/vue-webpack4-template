@@ -49,28 +49,21 @@ export default {
   methods: {
     onSubmit () {
       fetch('https://api.myjson.com/bins/10lhvy')
-      .then(response => response.json())
-      .then(json => {
-        this.users = json.users
-      })
-      .then(() => {
-        let email = this.form.email
-        let password = this.form.password
-        sessionStorage.user = JSON.stringify(this.users.find(function (user) {
-           return ((user.email === email) && (user.password === password))
-        }))
-        console.log(sessionStorage.user)
+        .then(response => response.json())
+        .then(json => {
+          this.users = json.users
+        })
+        .then(() => {
+          let email = this.form.email
+          let password = this.form.password
+          sessionStorage.user = JSON.stringify(this.users.find(function (user) {
+            return ((user.email === email) && (user.password === password))
+          }))
+          console.log(sessionStorage.user)
 
-        this.$router.push('/')
-      })
-      let email = this.form.email
-      let password = this.form.password
-      sessionStorage.user = JSON.stringify(this.users.find(function (user) {
-        return ((user.email === email) && (user.password === password))
-      }))
-      console.log(sessionStorage)
+          this.$router.push('/')
+        })
 
-      this.$router.push('/')
       /*
       let myjson = []
       myjson = JSON.parse('https://api.myjson.com/bins/10lhvy')
