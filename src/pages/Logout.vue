@@ -7,6 +7,7 @@
 export default {
   mounted: function () {
     sessionStorage.user = 'undefined'
+    this.$router.push('/')
   }
 }
 </script>

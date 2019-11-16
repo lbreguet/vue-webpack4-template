@@ -42,20 +42,53 @@ export default {
       form: {
         email: '',
         password: ''
-      }
+      },
+      users: []
     }
   },
   methods: {
     onSubmit () {
-      let myjson = JSON.parse('https://api.myjson.com/bins/10lhvy')
+      fetch('https://api.myjson.com/bins/10lhvy')
+      .then(response => response.json())
+      .then(json => {
+        this.users = json.users
+      })
+      .then(() => {
+        let email = this.form.email
+        let password = this.form.password
+        sessionStorage.user = JSON.stringify(this.users.find(function (user) {
+           return ((user.email === email) && (user.password === password))
+        }))
+        console.log(sessionStorage.user)
+
+        this.$router.push('/')
+      })
+      let email = this.form.email
+      let password = this.form.password
+      sessionStorage.user = JSON.stringify(this.users.find(function (user) {
+        return ((user.email === email) && (user.password === password))
+      }))
+      console.log(sessionStorage)
+
+      this.$router.push('/')
+      /*
+      let myjson = []
+      myjson = JSON.parse('https://api.myjson.com/bins/10lhvy')
+      let req = new XMLHttpRequest();
+      req.open('GET', 'https://api.myjson.com/bins/10lhvy', false);
+      req.send(null);
+      console.log(req.responseText);
+      myjson = JSON.parse(req.responseText.users)
       console.log(myjson)
       let email = this.form.email
       let password = this.form.password
       sessionStorage.user = JSON.stringify(myjson.find(function (user) {
         return ((user.email === email) && (user.password === password))
       }))
+      console.log(sessionStorage)
 
       this.$router.push('/')
+      */
     }
   }
 }

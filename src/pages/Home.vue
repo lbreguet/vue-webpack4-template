@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>Welcome <span v-if="user">{{ user }}</span> to the Fan Film Database</h1>
+    <h1>Welcome <span v-if="user">{{ user.name }}</span> to the Fan Film Database</h1>
   </div>
 </template>
 
