@@ -15,7 +15,21 @@ export default {
     fetch('https://api.myjson.com/bins/10lhvy')
       .then(response => response.json())
       .then(json => {
-        this.users = json.users
+        /*
+        console.log(json.users)
+        sessionStorage.users = JSON.parse(json.users)[0]
+        console.log(sessionStorage)
+        */
+        sessionStorage.setItem('users', JSON.stringify(json.users))
+
+        let usersDataString = sessionStorage.getItem('users')
+        console.log(usersDataString)
+
+        var usersData = JSON.parse(usersDataString)
+        console.log(usersData)
+
+        sessionStorage.users = JSON.parse(usersData)
+        console.log(sessionStorage)
       })
   },
   mounted: function () {
