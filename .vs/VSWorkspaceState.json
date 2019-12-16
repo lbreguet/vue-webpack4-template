@@ -3,14 +3,14 @@
     "",
     "\\assets",
     "\\assets\\css",
+    "\\assets\\img",
     "\\assets\\json",
     "\\build",
     "\\src",
     "\\src\\components",
-    "\\src\\components\\Home",
     "\\src\\pages",
     "\\src\\router"
   ],
-  "SelectedNode": "\\src\\pages\\Login.vue",
+  "SelectedNode": "\\assets\\json\\movies.json",
   "PreviewInSolutionExplorer": false
 }

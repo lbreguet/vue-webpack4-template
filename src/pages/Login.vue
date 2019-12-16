@@ -47,7 +47,8 @@ export default {
   },
   methods: {
     onSubmit () {
-      let myjson = [sessionStorage.users]
+      let myjson = JSON.parse(sessionStorage.users)
+      console.log(myjson)
       let email = this.form.email
       let password = this.form.password
       sessionStorage.user = JSON.stringify(myjson.find(function (user) {

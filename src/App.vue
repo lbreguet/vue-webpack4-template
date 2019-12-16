@@ -45,7 +45,15 @@
               Film Directory
             </b-nav-item>
             <b-nav-item
-              class="log"
+              v-if="user"
+              to="/logout"
+              exact
+              exact-active-class="active"
+            >
+              Logout
+            </b-nav-item>
+            <b-nav-item
+              v-else
               to="/login"
               exact
               exact-active-class="active"
@@ -71,5 +79,25 @@ b-nav-item
 </style>
 
 <script>
-
+export default {
+  data: function () {
+    return {
+      user: undefined
+    }
+  },
+  created: function () {
+    fetch('https://api.myjson.com/bins/10lhvy')
+      .then(response => response.json())
+      .then(json => {
+        sessionStorage.users = JSON.stringify(json.users)
+        console.log(sessionStorage)
+      })
+  },
+  mounted: function () {
+    let v = sessionStorage.user
+    if (v !== 'undefined') {
+      this.user = JSON.parse(v)
+    }
+  }
+}
 </script>

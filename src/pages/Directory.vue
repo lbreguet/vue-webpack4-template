@@ -1,47 +1,46 @@
 <template>
-  <div>
-    <div>
-      <b-button v-b-modal.modal-1>
-        Filter
-      </b-button>
-
-      <b-modal
-        id="modal-1"
-        title="Filter"
-      >
-        <div>
-          <b-form-group label="Genres:">
-            <b-form-checkbox-group
-              id="checkbox-group-1"
-              v-model="selected"
-              :options="genres"
-              name="genres"
-            />
-          </b-form-group>
-        </div>
-        <span @click="onClear">Clear</span>
-      </b-modal>
-    </div>
-    <div>
-      <div
-        v-for="movie in filteredMovies"
+  <div class="container">
+    <newMovie />
+    <table class="all-movies">
+      <tr>
+        <th>Poster</th>
+        <th>Title</th>
+        <th>Genre</th>
+        <th>Year</th>
+        <th>Update</th>
+        <th>Delete</th>
+      </tr>
+      <tr
+        v-for="movie in movies"
         :key="movie.id"
       >
-        <img :src="movie.img">
-        <p>{{ movie.title }}</p>
-        <p>{{ movie.genre }}</p>
-        <p>{{ movie.year }}</p>
-      </div>
-    </div>
+        <td><img :src="movie.img"></td>
+        <td>{{ movie.title }}</td>
+        <td>{{ movie.genre }}</td>
+        <td>{{ movie.year }}</td>
+      </tr>
+    </table>
   </div>
 </template>
 
+<style lang="stylus" scoped>
+    table
+      text-align center
+
+    tr
+      padding 10
+</style>
+
 <script>
+import newMovie from '../components/newMovie'
 export default {
+  components: {
+    newMovie
+  },
   data: function () {
     return {
       movies: [],
-      genres: [],
+      years: [],
       selected: []
     }
   },
@@ -52,32 +51,19 @@ export default {
         this.movies = json.movies
       })
       .then(() => {
-        let g = []
+        let y = []
         for (let i = 0; i < this.movies.length; i++) {
-          let temp = this.movies[i].genre.split(', ')
-          for (let j = 0; j < temp.length; j++) {
-            g.push(temp[j])
-          }
+          let temp = this.movies[i].year
+          y.push(temp)
         }
         let rem = (arr) => arr.filter((v, i) => arr.indexOf(v) === i)
-        this.genres = rem(g)
-        this.genres.sort()
+        this.years = rem(y)
+        this.years.sort()
       })
-  },
-  computed: {
-      filteredMovies () {
-          if (this.selected === []) {
-              console.log("empty")
-              return this.movies
-          } else {
-              console.log("filter")
-              return this.movies
-          }
-      }
   },
   methods: {
     onClear () {
-       this.selected = []
+      this.selected = []
     }
   }
 }
