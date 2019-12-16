@@ -8,58 +8,68 @@
       id="modal-1"
       title="BootstrapVue"
     >
-      <form>
-        Title:<br>
-        <input
+      <b-form @submit="onSubmit">
+        <b-form-input
+          v-model="movie.title"
           class="title"
           type="text"
           name="title"
-        ><br>
-        Year:<br>
-        <input
+          placeholder="Title"
+        />
+        <b-form-input
+          v-model="movie.year"
           class="year"
           type="text"
           name="year"
-        ><br>
-        Genre:<br>
-        <input
+          placeholder="Year"
+        />
+
+        <b-form-input
+          v-model="movie.genre"
           class="genre"
           type="text"
           name="genre"
-        ><br>
-        Poster Url:<br>
-        <input
+          placeholder="Genre"
+        />
+        <b-form-input
+          v-model="movie.img"
           class="img"
           type="text"
           name="img"
+          placeholder="Poster Url"
+        />
+
+        <b-button
+          type="submit"
+          variant="primary"
         >
-        <br>
-        <input
-          type="button"
-          value="Submit"
-          @click="newMovie()"
-        >
-      </form>
+          Submit
+        </b-button>
+      </b-form>
     </b-modal>
   </div>
 </template>
 
 <script>
-import JQuery from 'jquery'
-let $ = JQuery
 export default {
+  data () {
+    return {
+      movie: {
+        title: '',
+        year: '',
+        genre: '',
+        img: ''
+      }
+    }
+  },
   methods: {
-    newMovie () {
-      let title = $('.title').val()
-      let year = $('.year').val()
-      let genre = $('.genre').val()
-      let img = $('.img').val()
-      $('.allmovies').append('<tr>' +
-        '<td><img src="' + img + '"></td>' +
-        '<td>' + title + '</td>' +
-        '<td>' + genre + '</td>' +
-        '<td>' + year + '</td>' +
-      '</tr>')
+    onSubmit () {
+      console.log(this.$axios)
+      this.$axios.post('/movies', this.movie)
+        .then(response => {
+          alert(response.data.data.message)
+          this.$emit('refresh')
+        })
     }
   }
 }

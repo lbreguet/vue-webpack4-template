@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <newMovie />
+    <newMovie @refresh="refresh()" />
     <table class="all-movies">
       <tr>
         <th>Poster</th>
@@ -32,16 +32,11 @@
 </style>
 
 <script>
-import newMovie from '../components/newMovie'
+// import newMovie from '../components/newMovie'
 export default {
-  components: {
-    newMovie
-  },
   data: function () {
     return {
-      movies: [],
-      years: [],
-      selected: []
+      movies: []
     }
   },
   created: function () {
@@ -50,21 +45,6 @@ export default {
       .then(json => {
         this.movies = json.movies
       })
-      .then(() => {
-        let y = []
-        for (let i = 0; i < this.movies.length; i++) {
-          let temp = this.movies[i].year
-          y.push(temp)
-        }
-        let rem = (arr) => arr.filter((v, i) => arr.indexOf(v) === i)
-        this.years = rem(y)
-        this.years.sort()
-      })
-  },
-  methods: {
-    onClear () {
-      this.selected = []
-    }
   }
 }
 </script>
